@@ -17,7 +17,7 @@ class PostsTableSeeder extends Seeder
 
         for($i = 1; $i <= 10; $i++)
         {
-        	$image = rand(1, 5) . ".jpg";
+        	$image = "Post_Image_" . rand(1, 5) . ".jpg";
         	$date = date("Y-m-d H:i:s", strtotime("2018-01-23 09:21:00 +{$i} days"));
 
         	$posts[] = [
