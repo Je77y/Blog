@@ -14,6 +14,7 @@ class BlogController extends Controller
     {
     	// \DB::enableQueryLog();
     	$posts = Post::with('author')
+            ->published()
     		->simplePaginate($this->limit);
     		// ->paginate(3);
     	return view("blog.index", compact('posts'));
