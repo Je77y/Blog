@@ -38,4 +38,6 @@ class Post extends Model
     {
     	return $this->orderBy('published_at', 'desc')->where("published_at", "<=", Carbon::now());
     }
+
+    
 }
