@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Carbon\Carbon;
 
 class CategoriesTableSeeder extends Seeder
 {
@@ -8,20 +9,28 @@ class CategoriesTableSeeder extends Seeder
     {
         DB::table('categories')->truncate();
 
-        DB::table('categories')->insert(
+        $createdDate = Carbon::now();
+
+        DB::table('categories')->insert([
         	[
         		'title' => 'Web Design',
-	        	'slug' => 'web-design'
+	        	'slug' => 'web-design',
+                'created_at' => $createdDate,
+                'updated_at' => $createdDate,
         	],
         	[
         		'title' => 'Web Development',
-	        	'slug' => 'web-development'
+	        	'slug' => 'web-development',
+                'created_at' => $createdDate,
+                'updated_at' => $createdDate,
         	],
         	[
         		'title' => 'General',
-	        	'slug' => 'general'
+	        	'slug' => 'general',
+                'created_at' => $createdDate,
+                'updated_at' => $createdDate,
         	]
-        );
+        ]);
 
         // update the posts data 
         for ($i = 1; $i <= 10; $i++)

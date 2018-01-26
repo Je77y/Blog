@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\User;
+use App\Category;
 use Carbon\Carbon;
 use GrahamCampbell\Markdown\Facades\Markdown;
 
@@ -15,6 +16,11 @@ class Post extends Model
 	{
 		return $this->belongsTo(User::class);
 	}
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 
     public function getImageUrlAttribute($value)
     {
