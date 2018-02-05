@@ -32,9 +32,9 @@ class BlogController extends Controller
     {
         $categoryName = $category->title;
 
-        $posts = $categories
-            ->with('author')
+        $posts = $category
             ->posts()
+            ->with('author')
             ->published()
             ->simplePaginate($this->limit);
         return view("blog.index", compact('posts', 'categoryName'));

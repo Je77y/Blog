@@ -12,6 +12,7 @@ class Category extends Model
     	return $this->hasMany(Post::class);
     }
 
+	// 'id' ==> 'slug'
     public function getRouterKeyName()
     {
     	return 'slug';

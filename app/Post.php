@@ -27,7 +27,7 @@ class Post extends Model
     	$imageUrl = "";
     	if (!is_null($this->image))
 		{
-			$imagePath = public_path() . "\img\\" . $this->image;
+			$imagePath = public_path() . "/img/" . $this->image;
 			if (file_exists($imagePath))
 			{	
 				$imageUrl = asset("img/" . $this->image);
@@ -43,7 +43,8 @@ class Post extends Model
 
     public function scopePublished($query)
     {
-    	return $this->orderBy('published_at', 'desc')->where("published_at", "<=", Carbon::now());
+        // 'query' khong phai 'this'
+    	return $query->orderBy('published_at', 'desc')->where("published_at", "<=", Carbon::now());
     }
 
     public function getBodyHtmlAttribute($value)

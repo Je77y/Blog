@@ -14,6 +14,7 @@ class ComposerSeriveProvider extends ServiceProvider
      */
     public function boot()
     {
+        // Thanh phan dung chung 
         view()->composer('layouts.sidebar', function($view) {
             $categories = Category::with(['posts' => function($query) {
                 $query->published();
