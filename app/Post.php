@@ -24,7 +24,7 @@ class Post extends Model
 
     public function getImageUrlAttribute($value)
     {
-    	$imageUrl = "";
+    	$imageUrl = asset("img/notfound.png");
     	if (!is_null($this->image))
 		{
 			$imagePath = public_path() . "/img/" . $this->image;

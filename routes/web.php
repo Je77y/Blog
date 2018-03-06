@@ -10,7 +10,7 @@ Route::get('blog/{post}', [
 	'as' => 'blog.show'
 ]);
 
-Route::get('category/{category}', [
+Route::get('chude/{category}', [
 	'uses' => 'BlogController@category',
 	'as' => 'category'
 ]);
@@ -23,21 +23,25 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
 	]);
 
 	// Post
-	Route::get('/post', [
+	Route::get('/baiviet', [
 		'uses' => 'PostController@index',
 		'as' => 'admin.post'
+	]);
+	Route::get('/baiviet/themmoi', [
+		'uses' => 'PostController@store',
+		'as' => 'admin.post.add'
 	]);
 
 
 	// Category
-	Route::get('/category', [
+	Route::get('/chude', [
 		'uses' => 'CategoryController@index',
 		'as' => 'admin.category'
 	]);
 
 
 	// User
-	Route::get('/user', [
+	Route::get('/nguoidung', [
 		'uses' => 'UserController@index',
 		'as' => 'admin.user'
 	]);
