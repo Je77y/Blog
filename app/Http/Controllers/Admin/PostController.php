@@ -20,4 +20,9 @@ class PostController extends Controller
     	return view('admin.posts._add');
     	// return response(json_encode("Thanh cong"));
     }
+
+    public function edit($baiviet)
+    {
+    	return view('admin.posts._edit', compact('baiviet'));
+    }
 }

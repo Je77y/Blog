@@ -31,6 +31,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
 		'uses' => 'PostController@store',
 		'as' => 'admin.post.add'
 	]);
+	Route::get('/baiviet/capnhat/{baiviet}', [
+		'uses' => 'PostController@edit',
+		'as' => 'admin.post.edit'
+	]);
 
 
 	// Category

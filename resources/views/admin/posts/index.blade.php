@@ -16,7 +16,7 @@
                 <div class="row">
                     <div class="col-lg-4">
                         <p>
-                            <button onclick="addModal({{ route("admin.post.add") }})" type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-modal">Thêm mới</button>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-modal" onclick="addModal()">Thêm mới</button>
                         </p>
                     </div>
                     <div class="col-lg-8">
@@ -89,15 +89,30 @@ var drawTable = function(index, obj) {
             '<td>' + obj.title + '</td>' +
             '<td>' + obj.author.name + '</td>' +
             '<td>' + obj.category.title + '</td>' +
-            '<td><p><a href="" class="btn btn-info">Cập nhật</a></p>' +
+            '<td><p><button onclick="editModal('+ obj.id +')" class="btn btn-info">Cập nhật</button></p>' +
             '<p><a href="" class="btn btn-danger">Xóa</a></td></tr>';
     return str;
 };
 
-var addModal = function(url){
+var editModal = function(id){
+    var url = '{{ route("admin.post.edit", "\Request::segment(5)") }}';
     $.ajax({
         type: 'get',
         url: url,
+        success: function(data){
+            $("#edit-modal").html(data);
+            $("#edit-modal").modal("show");
+        }, 
+        error: function(){
+            console.log("Loi- caap nhatj");
+        }
+    });
+}
+
+var addModal = function(){
+    $.ajax({
+        type: 'get',
+        url: '{{ route("admin.post.add") }}' ,
         success: function(data){
             $("#add-modal").html(data);
             $("#add-modal").modal("show");
