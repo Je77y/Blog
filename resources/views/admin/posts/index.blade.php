@@ -95,7 +95,8 @@ var drawTable = function(index, obj) {
 };
 
 var editModal = function(id){
-    var url = '{{ route("admin.post.edit", "\Request::segment(5)") }}';
+    var url = '{{ route("admin.post.edit", ":id") }}';
+    url = url.replace(':id', id);
     $.ajax({
         type: 'get',
         url: url,

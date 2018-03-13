@@ -22,7 +22,17 @@ class PostController extends Controller
     }
 
     public function edit($baiviet)
-    {
+    {  
     	return view('admin.posts._edit', compact('baiviet'));
+    }
+
+    public function update(Request $request)
+    {
+        
+    }
+
+    public function delete($id)
+    {
+        
     }
 }

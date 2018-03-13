@@ -66,6 +66,8 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="js/sb-admin-2.min.js"></script>
+    <script src="js/notify.min.js"></script>
+
     
     @yield('js')
 </body>

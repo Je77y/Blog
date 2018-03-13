@@ -42,11 +42,67 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
 		'uses' => 'CategoryController@index',
 		'as' => 'admin.category'
 	]);
+	Route::get('/chude/themmoi', [
+		'uses' => 'CategoryController@store',
+		'as' => 'admin.category.store'
+	]);
+	Route::post('/chude/taomoi', [
+		'uses' => 'CategoryController@create',
+		'as' => 'admin.category.create'
+	]);
+	Route::get('/chude/capnhat/{chude}', [
+		'uses' => 'CategoryController@edit',
+		'as' => 'admin.category.edit'
+	]);
+	Route::post('/chude/sua', [
+		'uses' => 'CategoryController@update', 
+		'as' => 'admin.category.update'
+	]);
+	Route::get('/chude/lammoi', [
+		'uses' => 'CategoryController@reload',
+		'as' => 'admin.category.reload'
+	]);
+	Route::get('/chude/timkiem', [
+		'uses' => 'CategoryController@search',
+		'as' => 'admin.category.search'
+	]);
+	Route::get('/chude/xoa/{id}', [
+		'uses' => 'CategoryController@delete',
+		'as' => 'admin.category.delete'
+	]);
 
 
 	// User
-	Route::get('/nguoidung', [
+	Route::get('/tacgia', [
 		'uses' => 'UserController@index',
 		'as' => 'admin.user'
 	]);
+	Route::get('/tacgia/themmoi', [
+		'uses' => 'UserController@store',
+		'as' => 'admin.user.add'
+	]);
+	Route::post('/tacgia/taomoi', [
+		'uses' => 'UserController@create',
+		'as' => 'admin.user.create'
+	]);
+	Route::get('/tacgia/capnhat/{tacgia}', [
+		'uses' => 'UserController@edit',
+		'as' => 'admin.user.edit'
+	]);
+	Route::get('/tacgia/lammoi', [
+		'uses' => 'UserController@reload',
+		'as' => 'admin.user.reload'
+	]);
+	Route::get('/tacgia/timkiem', [
+		'uses' => 'UserController@search', 
+		'as' => 'admin.user.search'
+	]);
+	Route::get('/tacgia/xoa/{id}', [
+		'uses' => 'UserController@delete',
+		'as' => 'admin.user.delete'
+	]);
+	Route::get('/tacgia/doimatkhau', [
+
+	]);
+
 });
