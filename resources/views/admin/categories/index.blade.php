@@ -20,14 +20,11 @@
                         </p>
                     </div>
                     <div class="col-lg-8">
-                        
-                            <div class="form-group pull-right">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="keySearch" placeholder="Từ khóa...">
-                                </div>
-                                
-                            </div>
-                       
+                        <div class="form-group pull-right">
+                            <div class="input-group">
+                                <input type="text" name="keyword" class="form-control" id="keySearch" placeholder="Từ khóa...">
+                            </div>  
+                        </div>
                     </div>
                 </div>
                 <table width="100%" class="table table-striped table-bordered table-hover">
@@ -69,7 +66,7 @@ $.ajaxSetup({
     }
 });
 
-var loadDataTable = function(data) {
+function loadDataTable(data) {
     // ('#table_posts').empty();
     var a = '';
     $.each(data, function(index, obj) {
@@ -78,7 +75,7 @@ var loadDataTable = function(data) {
     $("#table_categories").html(a);
 };
 
-var reloadDataTable = function() {
+function reloadDataTable() {
     $.ajax({
         type: 'get',
         dataType: 'json',
@@ -92,7 +89,25 @@ var reloadDataTable = function() {
     });
 };
 
-var drawTable = function(index, obj) {
+$("#keySearch").keyup(function() {
+    $keyword = $(this).val();
+    var url = '{{ route('admin.category.search', ':key') }}';
+    url = url.replace(':key', $keyword);
+    $.ajax({
+        type: 'get',
+        url: url,
+        dataType: 'json',
+        data: {'keyword' : $keyword},
+        success: function(data) {
+            loadDataTable(data);
+        },
+        error: function() {
+            console.log("Loi - tim kiem loi");
+        }
+    });
+});
+
+function drawTable(index, obj) {
     var str = '<tr><td>' + index + '</td>' +
             '<td>' + obj.title + '</td>' +
             '<td>' + obj.created_at + '</td>' +
@@ -147,6 +162,6 @@ var deleteModal = function(id) {
             console.log("Loi - Xoa that bai");
         }
     });
-}
+};
 </script>
 @endsection

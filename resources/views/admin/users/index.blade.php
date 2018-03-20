@@ -69,7 +69,7 @@ $.ajaxSetup({
     }
 });
 
-var loadDataTable = function(data) {
+function loadDataTable(data) {
     // ('#table_posts').empty();
     var a = '';
     $.each(data, function(index, obj) {
@@ -78,7 +78,21 @@ var loadDataTable = function(data) {
     $("#table_users").html(a);
 };
 
-var drawTable = function(index, obj) {
+function reloadDataTable() {
+    $.ajax({
+        type: 'get',
+        url: '{{ route("admin.user.reload") }}',
+        dataType: 'json', 
+        success: function(data){
+            loadDataTable(data);
+        },
+        error: function(){
+            console.log("Loi - Lam moi lai du lieu");
+        }
+    });
+};
+
+function drawTable(index, obj) {
     var str = '<tr><td>' + index + '</td>' +
             '<td>' + obj.name + '</td>' +
             '<td>' + obj.email + '</td>' +
@@ -106,7 +120,7 @@ var editModal = function(id){
     });
 };
 
-var addModal = function(){
+function addModal() {
     $.ajax({
         type: 'get',
         url: '{{ route("admin.user.add") }}' ,
@@ -133,20 +147,6 @@ var deleteModal = function(id){
         },
         error: function(){
             console.log("Loi - Xoa tac giar");
-        }
-    });
-};
-
-var reloadDataTable = function() {
-    $.ajax({
-        type: 'get',
-        url: '{{ route("admin.user.reload") }}',
-        dataType: 'json', 
-        success: function(data){
-            loadDataTable(data);
-        },
-        error: function(){
-            console.log("Loi - Lam moi lai du lieu");
         }
     });
 };

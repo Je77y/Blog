@@ -14,8 +14,8 @@ class User extends Authenticatable
 
     protected $searchable = [
         'columns' => [
-            'users.name' => 10,
-            'users.email' => 5,
+            'users.name' => 1,
+            'users.email' => 2,
             'users.id' => 3,
         ]
     ];

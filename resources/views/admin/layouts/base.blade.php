@@ -65,10 +65,17 @@
     <script src="js/morris-data.js"></script> --}}
 
     <!-- Custom Theme JavaScript -->
-    <script src="js/sb-admin-2.min.js"></script>
+    {{-- <script src="js/sb-admin-2.min.js"></script> --}}
     <script src="js/notify.min.js"></script>
-
     
+    <script>
+        $(document).ready(function() {
+            $('.anchor').click(function() {
+                $('.anchor').removeClass('active');
+                $(this).addClass('active');
+            });
+        });
+    </script>
     @yield('js')
 </body>
 

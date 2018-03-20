@@ -62,7 +62,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
 		'uses' => 'CategoryController@reload',
 		'as' => 'admin.category.reload'
 	]);
-	Route::get('/chude/timkiem', [
+	Route::get('/chude/timkiem/{tukhoa}', [
 		'uses' => 'CategoryController@search',
 		'as' => 'admin.category.search'
 	]);

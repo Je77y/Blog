@@ -11,8 +11,9 @@ class CategoryController extends Controller
 {
     public function index()
     {
-    	$categories = json_encode(Category::orderBy('created_at', 'desc')->get());
+    	$categories = Category::orderBy('created_at', 'desc')->get();
     	return view('admin.categories.index', compact('categories'));
+        // return response($categories);
     }
 
     public function reload()
@@ -49,12 +50,28 @@ class CategoryController extends Controller
 
     public function update(Request $request)
     {
-
+        $mss = new Message('Cập nhật thành công', true);
+        try {
+            $category = Category::findOrFail($request->get('id'));
+            $title = $request->get('title');
+            $category->title = $title;
+            $category->slug = changeTitle($title);
+            $category->save();
+        } catch(Exception $e) {
+            $mss->message = 'Lỗi. Cập nhật thất bại';
+            $mss->status = false;
+        }
+        return response()->json($mss);
     }
 
-    public function search(Request $request)
+    public function search($keyword)
     {
-
+        $keyword = trim($keyword);
+        if($keyword == null ) 
+            $categories = json_encode(Category::orderBy('created_at', 'desc')->get());
+        else 
+            $categories = json_encode(Category::where('title', 'like', "%{$keyword}%")->get());
+        return response($categories);
     }
 
     public function delete($id)

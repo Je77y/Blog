@@ -11,7 +11,7 @@ class UserController extends Controller
 {
     public function index()
     {
-    	$authors = json_encode(User::orderBy('created_at', 'desc')->get());
+    	$authors = User::orderBy('created_at', 'desc')->get();
     	return view('admin.users.index', compact('authors'));
     }
 

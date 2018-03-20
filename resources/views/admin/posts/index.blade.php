@@ -70,9 +70,9 @@ $.ajaxSetup({
     }
 });
 
-var loadDataTable = function(data) {
+function loadDataTable(data) {
     // ('#table_posts').empty();
-    var a = '';
+    var a = "";
     $.each(data, function(index, obj) {
         if(obj.image == 'null' || obj.image == null) {
             obj.image = "notfound.png";
@@ -82,7 +82,7 @@ var loadDataTable = function(data) {
     $("#table_posts").html(a);
 };
 
-var drawTable = function(index, obj) {
+function drawTable(index, obj) {
     var str = '<tr><td>' + index + '</td>' +
             '<td><img src="img/' + obj.image + '" alt="' + obj.title +
             '" width="100%" height="25%"></td>' +
@@ -94,7 +94,7 @@ var drawTable = function(index, obj) {
     return str;
 };
 
-var editModal = function(id){
+function editModal(id){
     var url = '{{ route("admin.post.edit", ":id") }}';
     url = url.replace(':id', id);
     $.ajax({
@@ -110,7 +110,7 @@ var editModal = function(id){
     });
 }
 
-var addModal = function(){
+function addModal(){
     $.ajax({
         type: 'get',
         url: '{{ route("admin.post.add") }}' ,

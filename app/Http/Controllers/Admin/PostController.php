@@ -10,7 +10,7 @@ class PostController extends Controller
 {
     public function index()
     {
-    	$posts = json_encode(Post::with('author')->with('category')->orderBy('created_at', 'desc')->get());
+    	$posts = Post::with('author')->with('category')->orderBy('created_at', 'desc')->get();
     	return view('admin.posts.index', compact('posts'));
     	// return response($posts);
     }

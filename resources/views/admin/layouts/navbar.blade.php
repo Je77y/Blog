@@ -45,17 +45,17 @@
                             </div>
                             <!-- /input-group -->
                         </li>
-                        <li>
-                            <a href="#"><i class="fa fa-dashboard fa-fw"></i> Trang chủ</a>
+                        <li >
+                            <a class="anchor active" href="{{ route('admin') }}"><i class="fa fa-dashboard fa-fw"></i> Trang chủ</a>
                         </li>
-                        <li>
-                            <a href="{{ route('admin.category') }}"><i class="fa fa-table fa-fw"></i> Chủ đề</a>
+                        <li >
+                            <a class="anchor" href="{{ route('admin.category') }}"><i class="fa fa-table fa-fw"></i> Chủ đề</a>
                         </li>
-                        <li>
-                            <a href="{{ route('admin.post') }}"><i class="fa fa-edit fa-fw"></i> Bài viết</a>
+                        <li >
+                            <a class="anchor" href="{{ route('admin.post') }}"><i class="fa fa-edit fa-fw"></i> Bài viết</a>
                         </li>
-                        <li>
-                            <a href="{{ route('admin.user') }}"><i class="fa fa-user fa-fw"></i> Tác gỉa</a>
+                        <li >
+                            <a class="anchor" href="{{ route('admin.user') }}"><i class="fa fa-user fa-fw"></i> Tác gỉa</a>
                             <!-- /.nav-second-level -->
                         </li>
                     </ul>
@@ -64,3 +64,5 @@
             </div>
             <!-- /.navbar-static-side -->
         </nav>
+
+        

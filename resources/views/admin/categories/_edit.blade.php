@@ -12,7 +12,7 @@
             <div class="row">
               <div class="col-lg-12">
                 <form action="{{ route('admin.category.update') }}" method="post" id="frm-edit">
-                    <input type="hidden" value="{{ $category->id }}">
+                    <input type="hidden" name="id" value="{{ $category->id }}">
                     <div class="form-group">
                         <label for="title">Tiêu đề</label>
                         <input required type="text" class="form-control" value="{{ $category->title }}" name="title" placeholder="Tên tiêu đề">
@@ -54,7 +54,7 @@
                     reloadDataTable();
                 }
                 else {
-                    $.notify("Kiểm tra du lieu nhap", "warn");
+                    $.notify(mss.message, "warn");
                 }
             },
             error: function(data){
