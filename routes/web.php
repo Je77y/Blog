@@ -15,6 +15,10 @@ Route::get('chude/{category}', [
 	'as' => 'category'
 ]);
 
+Route::get('/admin/login', function() {
+	return view('admin.login');
+});
+
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
 
 	Route::get('/', [

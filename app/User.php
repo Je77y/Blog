@@ -4,21 +4,12 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Nicolaslopezj\Searchable\SearchableTrait;
 use App\Post;
+use App\Role;
 
 class User extends Authenticatable
 {
     use Notifiable;
-    use SearchableTrait;
-
-    protected $searchable = [
-        'columns' => [
-            'users.name' => 1,
-            'users.email' => 2,
-            'users.id' => 3,
-        ]
-    ];
 
     protected $fillable = [
         'name', 'email', 'password',
@@ -31,5 +22,10 @@ class User extends Authenticatable
     public function posts()
     {
         return $this->hasMany(Post::class);
+    }
+
+    public function role() 
+    {
+        return $this->belongsTo(Role::class);
     }
 }
