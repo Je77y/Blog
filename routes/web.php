@@ -15,11 +15,21 @@ Route::get('chude/{category}', [
 	'as' => 'category'
 ]);
 
-Route::get('/admin/login', function() {
-	return view('admin.login');
+Route::group(['namespace' => 'Admin'], function() {
+	
+	Route::get('/admin/login', [
+		'uses' => 'UserController@login',
+		'as' => 'admin.login'
+	]);
+	
+	Route::post('/admin/signup', [
+		'uses' => 'UserController@signup',
+		'as' => 'admin.signup'
+	]);
 });
 
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
+
+Route::group(['middleware' => ['superadmin,admin'],'prefix' => 'admin', 'namespace' => 'Admin'], function() {
 
 	Route::get('/', [
 		'uses' => 'AdminController@index',

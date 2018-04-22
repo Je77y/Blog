@@ -73,4 +73,19 @@ class UserController extends Controller
         $mss = new Message("Xóa thành công", true);
         return response(json_encode($mss));
     }
+
+    public function login()
+    {
+        return view('admin.login');
+    }
+
+    public function signup(Request $request)
+    {
+        $data = $request->all();
+        unset($data['_token']);
+        if (\Auth::attempt($data)) {
+            return redirect()->route('admin');
+        }
+        return back()->withInput();
+    }
 }
