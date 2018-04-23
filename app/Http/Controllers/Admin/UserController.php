@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Message;
+use App\Http\Requests\FormLoginRequest;
 
 class UserController extends Controller
 {
@@ -79,13 +80,24 @@ class UserController extends Controller
         return view('admin.login');
     }
 
-    public function signup(Request $request)
+    public function signup(FormLoginRequest $request)
     {
         $data = $request->all();
         unset($data['_token']);
-        if (\Auth::attempt($data)) {
-            return redirect()->route('admin');
+        try {
+            if (\Auth::attempt($data)) 
+            {
+                return redirect()->route('admin');
+            }
+        } catch (Exception $e) {
+            return response()->json($ex, 500);
         }
-        return back()->withInput();
+        return redirect()->route('admin.login');
+    }
+
+    public function logout() 
+    {
+        \Auth::logout();
+        return redirect()->route('admin.logout');
     }
 }

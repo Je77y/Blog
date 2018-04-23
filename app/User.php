@@ -19,6 +19,24 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function isSuperAdmin()
+    {
+        $check = $this->role_id === 1 ? true : false;
+        return $check;
+    }
+
+    public function isAdmin() 
+    {
+        $check = $this->role_id === 2 ? true : false;
+        return $check;
+    }
+
+    public function isAuthro() 
+    {
+        $check = $this->role_id === 3 ? true : false;
+        return $check;
+    }
+
     public function posts()
     {
         return $this->hasMany(Post::class);

@@ -42,10 +42,9 @@ input[type=password] {
   color: red;
   margin: 5px 0px;
   height: 1.4em;
+  font-size: small;
 }
-.message-error {
-  display: none;
-}
+
 
 .loginmodal-container input[type=text]:hover,
 input[type=password]:hover {

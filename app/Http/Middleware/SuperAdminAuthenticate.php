@@ -2,7 +2,9 @@
 
 namespace App\Http\Middleware;
 
+use App\User;
 use Closure;
+use Illuminate\Support\Facades\Auth;
 
 class SuperAdminAuthenticate
 {
@@ -15,10 +17,10 @@ class SuperAdminAuthenticate
      */
     public function handle($request, Closure $next)
     {
-        $user = \Auth::user();
-        if( $user->role_id == 1 )
-            return redirect()->route('admin');
-
-        return $next($request);
+        if (Auth::check())
+        {
+            return $next($request);
+        }
+        return redirect()->route('admin.login');
     }
 }

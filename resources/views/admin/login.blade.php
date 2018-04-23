@@ -15,15 +15,33 @@
 	<div class="loginmodal-container">
 		<h1>Tài khoản của bạn</h1>
 		<br>
+		<!-- @if ($errors->any())
+			@foreach ($errors->all() as $mss)
+				<p>{{ $mss }}  </p>
+			@endforeach
+
+		@endif -->
 		<form action="{{ route('admin.signup') }}" method="POST">
 			{{ csrf_field() }}
 			<input type="text" name="email" placeholder="Email" autocomplete="off">
 			<div class="error">
-				<div class="message-error"></div>
+				<div class="message-error">
+					@if($errors->has('email'))  
+						@foreach ($errors->get('email') as $message)
+							{{ $message }}
+						@endforeach 
+					@endif
+				</div>
 			</div>
 			<input type="password" name="password" placeholder="Mật khẩu" autocomplete="off">
 			<div class="error">
-				<div class="message-error"></div>
+				<div class="message-error">
+					@if($errors->has('password')) 
+						@foreach ($errors->get('password') as $message)
+							{{ $message }}
+						@endforeach 
+					@endif
+				</div>
 			</div>
 			<input type="submit" class="login loginmodal-submit" value="Đăng nhập">
 		</form>

@@ -14,20 +14,20 @@ class UsersTableSeeder extends Seeder
         	[
         		'name' => "Cuong",
         		'email' => "cuong@gmail.com",
-				'password' => bcrypt('123456'),
-				'role_id' => rand(1,3)
+				'password' => bcrypt('abcdef'),
+				'role_id' => 1
         	],
         	[
         		'name' => "Hung",
         		'email' => "hung@gmail.com",
-				'password' => bcrypt('123456'),
-				'role_id' => rand(1,3)
+				'password' => bcrypt('password'),
+				'role_id' => 2
         	],
         	[
         		'name' => "Vu",
         		'email' => "vu@gmail.com",
-				'password' => bcrypt('123456'),
-				'role_id' => rand(1,3)
+				'password' => bcrypt('kuonvu'),
+				'role_id' => 3
         	]
         ]);
     }
