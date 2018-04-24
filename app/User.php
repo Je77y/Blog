@@ -31,7 +31,7 @@ class User extends Authenticatable
         return $check;
     }
 
-    public function isAuthro() 
+    public function isAuthor() 
     {
         $check = $this->role_id === 3 ? true : false;
         return $check;

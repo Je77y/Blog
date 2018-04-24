@@ -14,7 +14,17 @@
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i> @if (Auth::check()) {{ Auth::user()->name }} @endif<i class="fa fa-caret-down"></i>
+                        <i class="fa fa-user fa-fw"></i> 
+                            @if (Auth::check())
+                                @if (Auth::user()->isAdmin()) 
+                                    {{ Auth::user()->name }} <span>Admin</span>
+                                @elseif (Auth::user()->isSuperAdmin())
+                                    {{ Auth::user()->name }} <span>Supper Admin</span>
+                                @elseif (Auth::user()->isAuthor())
+                                    {{ Auth::user()->name }} <span>Author</span>
+                                @endif
+                            @endif
+                        <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="#"><i class="fa fa-user fa-fw"></i> Hồ sơ người dùng</a>
@@ -38,10 +48,10 @@
                             <div class="input-group custom-search-form">
                                 <input type="text" class="form-control" placeholder="Search...">
                                 <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
+                                    <button class="btn btn-default" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
                             </div>
                             <!-- /input-group -->
                         </li>

@@ -17,10 +17,19 @@ class SuperAdminAuthenticate
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::check())
+        if (Auth::check() && Auth::user()->isSuperAdmin())
         {
             return $next($request);
         }
+        elseif (Auth::check() && Auth::user()->isAdmin())
+        {
+            return redirect()->route('admin');
+        }
+        elseif (Auth::check() && Auth::user()->isAuthor())
+        {
+            return redirect()->route('author');
+        }
+                  
         return redirect()->route('admin.login');
     }
 }

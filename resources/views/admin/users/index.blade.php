@@ -16,7 +16,7 @@
                 <div class="row">
                     <div class="col-lg-3">
                         <p>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-modal" onclick="addModal()">Thêm mới</button>
+                            <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#add-modal" onclick="addModal()">Thêm mới</button>
                         </p>
                     </div>
                     <div class="col-lg-9">
@@ -123,7 +123,7 @@ var editModal = function(id){
 function addModal() {
     $.ajax({
         type: 'get',
-        url: '{{ route("admin.user.add") }}' ,
+        url: '{{ route("admin.user.store") }}' ,
         success: function(data){
             $("#add-modal").html(data);
             $("#add-modal").modal("show");

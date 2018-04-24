@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
-    <title>Admin - @yield('title')</title>
+    <title>Trang quan ly - {{ Auth::user()->name }}</title>
 
     <base href="{{ asset(' ') }}">
     <!-- Bootstrap Core CSS -->
@@ -67,15 +67,7 @@
     <!-- Custom Theme JavaScript -->
     {{-- <script src="js/sb-admin-2.min.js"></script> --}}
     <script src="js/notify.min.js"></script>
-    
-    <script>
-        $(document).ready(function() {
-            $('.anchor').click(function() {
-                $('.anchor').removeClass('active');
-                $(this).addClass('active');
-            });
-        });
-    </script>
+    <script src="js/main.js"></script>
     @yield('js')
 </body>
 

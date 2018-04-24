@@ -19,7 +19,6 @@
 			@foreach ($errors->all() as $mss)
 				<p>{{ $mss }}  </p>
 			@endforeach
-
 		@endif -->
 		<form action="{{ route('admin.signup') }}" method="POST">
 			{{ csrf_field() }}

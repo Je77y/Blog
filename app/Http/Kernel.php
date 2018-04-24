@@ -61,5 +61,6 @@ class Kernel extends HttpKernel
         // Customer
         'superadmin' => \App\Http\Middleware\SuperAdminAuthenticate::class,
         'admin' => \App\Http\Middleware\AdminAuthenticate::class,
+        'author' => \App\Http\Middleware\AuthorAuthenticate::class,
     ];
 }

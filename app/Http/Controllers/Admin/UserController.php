@@ -92,12 +92,15 @@ class UserController extends Controller
         } catch (Exception $e) {
             return response()->json($ex, 500);
         }
-        return redirect()->route('admin.login');
+        return response()->json([
+            'status' => 500,
+            'message' => 'Loi dang nhap'
+        ]);
     }
 
     public function logout() 
     {
         \Auth::logout();
-        return redirect()->route('admin.logout');
+        return redirect()->route('admin.login');
     }
 }

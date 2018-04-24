@@ -15,117 +15,179 @@ Route::get('chude/{category}', [
 	'as' => 'category'
 ]);
 
-Route::group(['namespace' => 'Admin'], function() {
-	
-	Route::get('/trangquanly/dangnhap', [
+Route::group([ 'namespace' => 'Admin', 'prefix' => 'trangquanly' ], function () {
+
+	Route::get('/dangnhap', [
 		'uses' => 'UserController@login',
 		'as' => 'admin.login'
 	]);
 	
-	Route::post('/trangquanly/dangnhap', [
+	Route::post('/dangnhap', [
 		'uses' => 'UserController@signup',
 		'as' => 'admin.signup'
-	]);
-});
-
-
-Route::group(['middleware' => ['superadmin', 'admin'], 'prefix' => 'trangquanly', 'namespace' => 'Admin'], function() {
-
-	Route::get('/', [
-		'uses' => 'AdminController@index',
-		'as' => 'admin'
 	]);
 
 	Route::get('/dangxuat', [
 		'uses' => 'UserController@logout',
 		'as' => 'admin.logout'
 	]);
+	
+	Route::group(['middleware' => 'superadmin'], function () {
 
+		Route::get('/quanlychinh', [
+			'uses' => 'AdminController@index',
+			'as' => 'superadmin'
+		]);
+
+		// Category
+		Route::get('/chude', [
+			'uses' => 'CategoryController@index',
+			'as' => 'admin.category'
+		]);
+		
+		Route::get('/chude/themmoi', [
+			'uses' => 'CategoryController@store',
+			'as' => 'admin.category.store'
+		]);
+		
+		Route::post('/chude/taomoi', [
+			'uses' => 'CategoryController@create',
+			'as' => 'admin.category.create'
+		]);
+		
+		Route::get('/chude/capnhat/{chude}', [
+			'uses' => 'CategoryController@edit',
+			'as' => 'admin.category.edit'
+		]);
+		
+		Route::post('/chude/sua', [
+			'uses' => 'CategoryController@update', 
+			'as' => 'admin.category.update'
+		]);
+		
+		Route::get('/chude/lammoi', [
+			'uses' => 'CategoryController@reload',
+			'as' => 'admin.category.reload'
+		]);
+
+		Route::get('/chude/timkiem/{tukhoa}', [
+			'uses' => 'CategoryController@search',
+			'as' => 'admin.category.search'
+		]);
+		
+		Route::get('/chude/xoa/{id}', [
+			'uses' => 'CategoryController@delete',
+			'as' => 'admin.category.delete'
+		]);
+
+		// user
+		Route::get('/tacgia', [
+			'uses' => 'UserController@index',
+			'as' => 'admin.user'
+		]);
+
+		Route::get('/tacgia/lammoi', [
+			'uses' => 'UserController@reload',
+			'as' => 'admin.user.reload'
+		]);
+
+		Route::get('/tacgia/themmoi', [
+			'uses' => 'UserController@store',
+			'as' => 'admin.user.store'
+		]);
+		
+		Route::post('/tacgia/taomoi', [
+			'uses' => 'UserController@create',
+			'as' => 'admin.user.create'
+		]);
+		
+		Route::get('/tacgia/timkiem', [
+			'uses' => 'UserController@search', 
+			'as' => 'admin.user.search'
+		]);
+
+		Route::get('/tacgia/capnhat/{tacgia}', [
+			'uses' => 'UserController@edit', 
+			'as' => 'admin.user.edit'
+		]);
+
+		Route::post('/tacgia/sua', [
+			'uses' => 'UserController@update', 
+			'as' => 'admin.user.update'
+		]);
+		
+		Route::get('/tacgia/xoa/{id}', [
+			'uses' => 'UserController@delete',
+			'as' => 'admin.user.delete'
+		]);
+
+	});
+	
+	Route::group(['middleware' => 'admin'], function () {
+
+		Route::get('/quanlyphu', [
+			'uses' => 'AdminController@index',
+			'as' => 'admin'
+		]);
+
+		// Category
+		Route::get('/chude', [
+			'uses' => 'CategoryController@index',
+			'as' => 'admin.category'
+		]);
+
+		Route::get('/chude/lammoi', [
+			'uses' => 'CategoryController@reload',
+			'as' => 'admin.category.reload'
+		]);
+
+		Route::get('/chude/timkiem/{tukhoa}', [
+			'uses' => 'CategoryController@search',
+			'as' => 'admin.category.search'
+		]);
+
+		// user
+		Route::get('/tacgia', [
+			'uses' => 'UserController@index',
+			'as' => 'admin.user'
+		]);
+
+		Route::get('/tacgia/lammoi', [
+			'uses' => 'UserController@reload',
+			'as' => 'admin.user.reload'
+		]);
+		
+		Route::get('/tacgia/timkiem', [
+			'uses' => 'UserController@search', 
+			'as' => 'admin.user.search'
+		]);
+
+	});
+	
+	Route::group(['middleware' => 'author'], function () {
+
+		Route::get('/nguoiviet', [
+			'uses' => 'AdminController@index',
+			'as' => 'author'
+		]);
+	});
+	
+	
 	// Post
 	Route::get('/baiviet', [
 		'uses' => 'PostController@index',
 		'as' => 'admin.post'
 	]);
+	
 	Route::get('/baiviet/themmoi', [
 		'uses' => 'PostController@store',
 		'as' => 'admin.post.add'
 	]);
+	
 	Route::get('/baiviet/capnhat/{baiviet}', [
 		'uses' => 'PostController@edit',
 		'as' => 'admin.post.edit'
 	]);
-
-
-	// Category
-	Route::get('/chude', [
-		'uses' => 'CategoryController@index',
-		'as' => 'admin.category'
-	]);
-	Route::get('/chude/themmoi', [
-		'uses' => 'CategoryController@store',
-		'as' => 'admin.category.store'
-	]);
-	Route::post('/chude/taomoi', [
-		'uses' => 'CategoryController@create',
-		'as' => 'admin.category.create'
-	]);
-	Route::get('/chude/capnhat/{chude}', [
-		'uses' => 'CategoryController@edit',
-		'as' => 'admin.category.edit'
-	]);
-	Route::post('/chude/sua', [
-		'uses' => 'CategoryController@update', 
-		'as' => 'admin.category.update'
-	]);
-	Route::get('/chude/lammoi', [
-		'uses' => 'CategoryController@reload',
-		'as' => 'admin.category.reload'
-	]);
-	Route::get('/chude/timkiem/{tukhoa}', [
-		'uses' => 'CategoryController@search',
-		'as' => 'admin.category.search'
-	]);
 	
-
-	Route::group(['middleware' => 'superadmin'], function () {
-		Route::get('/chude/xoa/{id}', [
-			'uses' => 'CategoryController@delete',
-			'as' => 'admin.category.delete'
-		]);
-	
-		Route::get('/tacgia', [
-			'uses' => 'UserController@index',
-			'as' => 'admin.user'
-		]);
-		Route::get('/tacgia/themmoi', [
-			'uses' => 'UserController@store',
-			'as' => 'admin.user.add'
-		]);
-		Route::post('/tacgia/taomoi', [
-			'uses' => 'UserController@create',
-			'as' => 'admin.user.create'
-		]);
-		Route::get('/tacgia/capnhat/{tacgia}', [
-			'uses' => 'UserController@edit',
-			'as' => 'admin.user.edit'
-		]);
-		Route::get('/tacgia/lammoi', [
-			'uses' => 'UserController@reload',
-			'as' => 'admin.user.reload'
-		]);
-		Route::get('/tacgia/timkiem', [
-			'uses' => 'UserController@search', 
-			'as' => 'admin.user.search'
-		]);
-		Route::get('/tacgia/xoa/{id}', [
-			'uses' => 'UserController@delete',
-			'as' => 'admin.user.delete'
-		]);
-	});
-	// User
-	
-	Route::get('/tacgia/doimatkhau', [
-
-	]);
-
 });
+
