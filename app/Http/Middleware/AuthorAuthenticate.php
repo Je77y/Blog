@@ -21,14 +21,6 @@ class AuthorAuthenticate
         {
             return $next($request);
         }
-        elseif (Auth::check() && Auth::user()->isSuperAdmin())
-        {
-            return redirect()->route('superadmin');
-        }
-        elseif (Auth::check() && Auth::user()->isAdmin())
-        {
-            return redirect()->route('admin');
-        }
             
         return redirect()->route('admin.login');
     }

@@ -13,21 +13,14 @@ class RolesTableSeeder extends Seeder
         $now = Carbon::now();
         DB::table('role')->insert([
         	[
-        		'name' => "SuperAdmin",
-                'slug' => "super-admin",
-                'created_at' => $now,
-                'updated_at' => $now
-        		
-        	],
-        	[
         		'name' => "Admin",
         		'slug' => "admin",
         		'created_at' => $now,
                 'updated_at' => $now
         	],
         	[
-        		'name' => "User",
-        		'slug' => "user",
+        		'name' => "Author",
+        		'slug' => "author",
         		'created_at' => $now,
                 'updated_at' => $now
             ],

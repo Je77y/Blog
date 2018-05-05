@@ -56,7 +56,7 @@
                     $.notify("Kiểm tra du lieu nhap", "warn");
                 }
             },
-            error: function(data){
+            error: function(){
                 $.notify("Thêm mới thất bại", "error");
             }
         });

@@ -27,7 +27,7 @@ class UsersTableSeeder extends Seeder
         		'name' => "Vu",
         		'email' => "vu@gmail.com",
 				'password' => bcrypt('kuonvu'),
-				'role_id' => 3 // tacgia
+				'role_id' => 2 // tacgia
         	]
         ]);
     }

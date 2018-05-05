@@ -10,9 +10,10 @@
     <meta name="author" content="">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
-    <title>Trang quan ly - {{ Auth::user()->name }}</title>
+    <title>Trang quan ly - </title>
 
     <base href="{{ asset(' ') }}">
+
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
@@ -28,6 +29,8 @@
     <!-- Custom Fonts -->
     <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+    <!-- Alertify -->
+    <link href="css/alertify.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -61,13 +64,17 @@
 
     <!-- Morris Charts JavaScript -->
     <script src="js/raphael.min.js"></script>
-    {{-- <script src="js/morris.min.js"></script>
-    <script src="js/morris-data.js"></script> --}}
 
     <!-- Custom Theme JavaScript -->
-    {{-- <script src="js/sb-admin-2.min.js"></script> --}}
     <script src="js/notify.min.js"></script>
     <script src="js/main.js"></script>
+
+    <!-- Alertify -->
+    <script src="js/alertify.min.js"></script>
+    <script type="text/javascript">
+        alertify.defaults.theme.ok = "btn btn-primary";
+        alertify.defaults.theme.cancel = "btn btn-danger";
+    </script>
     @yield('js')
 </body>
 

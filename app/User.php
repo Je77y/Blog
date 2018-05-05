@@ -19,21 +19,15 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function isSuperAdmin()
+    public function isAdmin() 
     {
         $check = $this->role_id === 1 ? true : false;
         return $check;
     }
 
-    public function isAdmin() 
-    {
-        $check = $this->role_id === 2 ? true : false;
-        return $check;
-    }
-
     public function isAuthor() 
     {
-        $check = $this->role_id === 3 ? true : false;
+        $check = $this->role_id === 2 ? true : false;
         return $check;
     }
 

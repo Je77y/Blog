@@ -149,19 +149,22 @@ var addModal = function() {
 
 var deleteModal = function(id) {
     var url = '{{ route("admin.category.delete", ":id") }}';
-    url = url.replace(':id', id)
-    $.ajax({
-        type: 'get',
-        dataType: 'json',
-        url: url,
-        success: function(data) {
-            $.notify(data.message, "success");
-            reloadDataTable();
-        }, 
-        error: function() {
-            console.log("Loi - Xoa that bai");
-        }
-    });
+    url = url.replace(':id', id);
+    alertify.confirm('Xoa chu de', 'Ban co chac chan muon xoa?', function () {
+        $.ajax({
+            type: 'get',
+            dataType: 'json',
+            url: url,
+            success: function(data) {
+                $.notify(data.message, "success");
+                reloadDataTable();
+            }, 
+            error: function() {
+                console.log("Loi - Xoa that bai");
+            }
+        });
+    }, null).set('labels', {ok:'Dong y', cancel:'Huy'});
+    
 };
 </script>
 @endsection

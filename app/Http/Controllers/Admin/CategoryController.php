@@ -6,19 +6,27 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Category;
 use App\Message;
+use App\Repositories\Repository;
 
 class CategoryController extends Controller
 {
+    private $model;
+
+    public function __construct(Category $category)
+    {
+        $this->model = new Repository($category);
+    }
+
     public function index()
     {
-    	$categories = Category::orderBy('created_at', 'desc')->get();
+    	$categories = $this->model->all();
     	return view('admin.categories.index', compact('categories'));
         // return response($categories);
     }
 
     public function reload()
     {
-        $categories = json_encode(Category::orderBy('created_at', 'desc')->get());
+        $categories = json_encode($this->model->all());
         return response($categories);
     }
 
@@ -29,12 +37,12 @@ class CategoryController extends Controller
 
     public function create(Request $request)
     {
+        $data = array_map('trim', $request->all());
         $mss = new Message('Thêm mới thành công', true);
         try {
-            $category = new Category;
-            $category->title = $request->get('title');
-            $category->slug = changeTitle($request->get('title'));
-            $category->save();
+            
+            $data += array('slug' => changeTitle($data['title']));
+            $this->model->create($data);
         } catch(Exception $e) {
             $mss->message = "Thêm mới thất bại";
             $mss->status = false;
@@ -44,19 +52,21 @@ class CategoryController extends Controller
 
     public function edit($id)
     {
-        $category = Category::findOrFail($id);
+        $category = $this->model->show($id);
         return view('admin.categories._edit', compact('category'));
     }
 
     public function update(Request $request)
     {
+        $data = $request->all();
         $mss = new Message('Cập nhật thành công', true);
         try {
-            $category = Category::findOrFail($request->get('id'));
+            $category = $this->model->show($data['id']);
             $title = $request->get('title');
             $category->title = $title;
             $category->slug = changeTitle($title);
-            $category->save();
+            $arr = array('title' => $category->title, 'slug' => $category->slug);
+            $this->model->update($arr, $data['id']);
         } catch(Exception $e) {
             $mss->message = 'Lỗi. Cập nhật thất bại';
             $mss->status = false;
@@ -76,8 +86,7 @@ class CategoryController extends Controller
 
     public function delete($id)
     {
-        $category = Category::findOrFail($id);
-        $category->delete();
+        $this->model->delete($id);
         return response()->json([
             'message' => 'Xóa thành công'
         ], 200);
